@@ -10,7 +10,7 @@
 #define epsilon 0.134970870
 #define leftMax 161
 #define rightMax 16
-#define LOWERED  23
+#define LOWERED  22
 #define LIFTED 50
 #define RIGHTX 4.5
 #define LOWERY 10

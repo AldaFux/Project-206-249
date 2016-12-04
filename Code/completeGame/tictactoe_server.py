@@ -3,9 +3,13 @@ from copy import deepcopy
 import Serial
 import time
 import vision as vs
+import random
 
 SER = Serial.Serial()
 time.sleep(2) #wait until the serial connection is open
+
+def false_decision():
+    return random.random() < 0.9
  
 class Board:
  
@@ -58,6 +62,10 @@ class Board:
       return best
       
   def best(self):
+    if(false_decision()):
+        length = len(self.emptyFields())
+        index = random.randint(0,length-1)
+        return self.getXYfromNumber(self.emptyFields()[index])
     if(len(self.emptyFields()) == 9):           #in case the computer makes the first move: spare some long computation and return an optimal result
       return ((1,1))
     else:
@@ -114,6 +122,12 @@ class Board:
           field_number= (3*(2-y) + x + 1)#1+x+3*y
           listing.append(field_number)
     return listing
+    
+  def getNumberFromXY(self, x, y):
+    return (3*(2-y) + x + 1)
+    
+  def getXYfromNumber(self, number):
+    return ((number-1)%3, 2-(number-1)/3 )
  
   def __str__(self):  #returns field of 3x3 characters
     string = ''
@@ -153,7 +167,7 @@ class GAME:
           moves = 0
           playerHasBegun = True
           print("Who is supposed to start the game? 1 = You; Anything else = The computer")
-          temp = raw_input().upper() ##raw_
+          temp = raw_input().upper() 
           if temp == '1':
             playerHasBegun = True
           else:
@@ -166,22 +180,36 @@ class GAME:
             time.sleep(0.5)
           SER.read()
           
-          if (not img.calibrated): #Calibrate in order to know the position of the field
-            img.calibrate()        #Automatically sets the calibrated flag of img
-            img.show_transform()
+          #if (not img.calibrated): #Calibrate in order to know the position of the field
+          img.calibrate()        #Automatically sets the calibrated flag of img
+            #img.show_transform()
             
           while moves < 9:
           
             if( (playerHasBegun and (moves % 2 == 0)) or ((not playerHasBegun) and (moves % 2 == 1))):
               print("make your move on the field!!!");
               number = ''
-              found = 0
+              found = False
               sign = ''
-              while not (number in self.board.emptyFields()):
+              while not (found):
                   print('Make your move')
                   (found, sign, number) = img.detect_sign(self.board.emptyFields())
+              if (sign == 'O'):                       #update the sign that should be used by the robot
+                  SER.write('X')
+              elif(sign == 'X'):
+                  SER.write('O')
+              while(not SER.ser.inWaiting()):
+                  time.sleep(0.0001)
+              SER.read()                            #read acknowledgement from Buffer
               (x,y) = self.getXYfromNumber(number)
               self.board = self.board.move(x,y)
+              if(self.board.won() != None):
+                print("Wohooo you have won!!!!")
+                SER.write('W')
+                moves = 9
+              elif (self.board.tied()):
+                print("It's something! At least you havn't lost. A new game will be started!")
+                SER.write('D')
               
             else:
               move = self.board.best()                                        
@@ -194,14 +222,22 @@ class GAME:
                   print("waiting")
                   time.sleep(0.5)
                 SER.read()
-                
+                if(self.board.won() != None):
+                    print("Such a bad luck! You have lost! A new game will be started!")
+                    SER.write('L')
+                    moves = 9
+                elif (self.board.tied()):
+                    print("It's something! At least you havn't lost. A new game will be started!")
+                    SER.write('D')
             print(self.board.__str__())
             
-            if(self.board.won() != None):
-              print("Such a bad luck! You have lost! A new game will be started!")
-              moves = 9
-            elif(self.board.tied()):
-              print("It's something! At least you havn't lost. A new game will be started!")
+            #if(self.board.won() != None):
+             # print("Such a bad luck! You have lost! A new game will be started!")
+              #SER.write('L')
+              #moves = 9
+            #if(self.board.tied()):
+              #print("It's something! At least you havn't lost. A new game will be started!")
+              #SER.write('D')
             moves = moves + 1
           print("")
           self.reset()
