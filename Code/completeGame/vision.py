@@ -13,12 +13,12 @@ class Image():
         self.height = 0
         self.sidelength = 0
         self.moving_min_area = 500.0
-        self.token_min_area = 750.0
-        self.tile_min_area = 100.0
+        self.token_min_area = 1200.0
+        self.tile_min_area = 300.0
         self.fgbg = cv2.createBackgroundSubtractorMOG2()
         
     def __enter__(self):
-        self.cap = cv2.VideoCapture(1)
+        self.cap = cv2.VideoCapture(0)
         return self
         
     def __exit__(self, exception, value, traceback):
@@ -38,9 +38,10 @@ class Image():
             else:
                 self.sidelength = self.width
             
-    # def showFrame(self):
-        # cv2.imshow('Frame captured',self.orig)
-        # cv2.waitKey(0)
+    def show_frame(self):
+        cv2.imshow('Frame captured',self.orig)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows
     
     def show_transform(self):
         cv2.imshow('Transformed board',self.transform)
@@ -54,6 +55,7 @@ class Image():
         # Record two images, so that the camera adjusts shutter time
         self.__record_frame()
         self.__record_frame()
+        #self.show_frame() #Debug
         
         # Convert image to binary
         gray = cv2.cvtColor(self.orig,cv2.COLOR_BGR2GRAY)

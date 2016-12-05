@@ -9,7 +9,7 @@ SER = Serial.Serial()
 time.sleep(2) #wait until the serial connection is open
 
 def false_decision():
-    return random.random() < 0.9
+    return random.random() < 0.00001 # ath the moment deactivated
  
 class Board:
  
@@ -19,6 +19,7 @@ class Board:
     self.empty = '.'
     self.size = 3
     self.fields = {}
+    self.depth = 0
     for y in range(self.size):
       for x in range(self.size):
         self.fields[x,y] = self.empty                               #initializing the field
@@ -31,19 +32,20 @@ class Board:
     board = Board(self)                                             #make copy of the board, and since an argument is passed, a deepcopy is made
     board.fields[x,y] = board.player                                #make the players move on the given field
     (board.player,board.opponent) = (board.opponent,board.player)   #switch the active player
+    board.depth += 1
     return board                                                    #return the modified board -- means that board itself is never modified but new instances of the board are created
     
  
   def __minimax(self, player):
     if self.won():                                                  #checks whether the opponent has won
       if player:                                                    #case that indeed the opponent has won
-        return (-1,None)                    
+        return (self.depth-10 ,None)                    
       else:                                                         #case the player has won
-        return (+1,None)
+        return (10-self.depth,None)
     elif self.tied():
       return (0,None)
     elif player:                                                    #noone has won yet - begin iterating over every empty field and start recursion
-      best = (-2,None)
+      best = (-11,None)
       for x,y in self.fields:
         if self.fields[x,y]==self.empty:
           value = self.move(x,y).__minimax(not player)[0]           #a lot is crunched to this line: First, a move is executed. Doing so, the board is copied in a variable. The copied board will be
@@ -157,12 +159,19 @@ class GAME:
     
   def getXYfromNumber(self, number):
     return ((number-1)%3, 2-(number-1)/3 )
+    
+  def waitForAcknowledgement(self):
+    while(not SER.ser.inWaiting()):
+            print("waiting")
+            time.sleep(0.1)
+    SER.read()
       
   def mainloop(self): #Basically the main of the whole part that runs on the computer
     print("Welcome to the optimal Tic Tac Toe player - you will never be able to win agains me!")
     
     with vs.Image() as img: # necessary in order to initialize the connection to the camera and to end it properly
-      
+        
+        
         while True:
           moves = 0
           playerHasBegun = True
@@ -175,17 +184,20 @@ class GAME:
             
           SER.write('F') # ASCII for F -  necessary for python 3 #send the command to draw the field
         
-          while(not SER.ser.inWaiting()):
-            print("waiting")
-            time.sleep(0.5)
-          SER.read()
+          self.waitForAcknowledgement()
           
           #if (not img.calibrated): #Calibrate in order to know the position of the field
-          img.calibrate()        #Automatically sets the calibrated flag of img
+          field_recognized = False
+          while (not field_recognized):
+            try:
+              img.calibrate()        #Automatically sets the calibrated flag of img
+              field_recognized = True
+            except:
+              continue
             #img.show_transform()
             
           while moves < 9:
-          
+            #THE PLAYER'S MOVE
             if( (playerHasBegun and (moves % 2 == 0)) or ((not playerHasBegun) and (moves % 2 == 1))):
               print("make your move on the field!!!");
               number = ''
@@ -198,19 +210,20 @@ class GAME:
                   SER.write('X')
               elif(sign == 'X'):
                   SER.write('O')
-              while(not SER.ser.inWaiting()):
-                  time.sleep(0.0001)
-              SER.read()                            #read acknowledgement from Buffer
+              self.waitForAcknowledgement()                           #read acknowledgement from Buffer
               (x,y) = self.getXYfromNumber(number)
               self.board = self.board.move(x,y)
               if(self.board.won() != None):
                 print("Wohooo you have won!!!!")
                 SER.write('W')
+                self.waitForAcknowledgement()
                 moves = 9
               elif (self.board.tied()):
                 print("It's something! At least you havn't lost. A new game will be started!")
                 SER.write('D')
-              
+                self.waitForAcknowledgement()
+                
+            #THE COMPUTERS MOVE  
             else:
               move = self.board.best()                                        
               if move:
@@ -226,9 +239,11 @@ class GAME:
                     print("Such a bad luck! You have lost! A new game will be started!")
                     SER.write('L')
                     moves = 9
+                    self.waitForAcknowledgement()
                 elif (self.board.tied()):
                     print("It's something! At least you havn't lost. A new game will be started!")
                     SER.write('D')
+                    self.waitForAcknowledgement()
             print(self.board.__str__())
             
             #if(self.board.won() != None):
