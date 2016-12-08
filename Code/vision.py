@@ -84,12 +84,12 @@ class Image():
         
         # Save the lower right corner of the region left from the field
         # Here, the sign indicating if the player wants to start or not will be detected
-        left_region_x = x-1.5*w
-        left_region_y = y+2.5*h
+        left_region_x = int(x-1.5*w)
+        left_region_y = int(y+2.5*h)
         if (left_region_x<0):
             raise Exception ('Not able to see region left of the field. Adjust camera position.')
         if (left_region_y>self.height):
-            left_region_y = self.height
+            left_region_y = int(self.height)
         self.left_region_bounds[1,:] = [left_region_x,left_region_y]
     
         # Calculate corner locations in source image from rectangle corners
