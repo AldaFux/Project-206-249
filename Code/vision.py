@@ -8,7 +8,8 @@ class Image():
         self.transform = []
         self.gray = []
         self.adap_thresh = []
-        self.left_region = np.zeros([2,2])
+        self.left_region_bounds = np.zeros([2,2])
+        self.left_region = []
         self.width = 0
         self.height = 0
         self.sidelength = 0
@@ -30,6 +31,7 @@ class Image():
             raise Exception('ERROR: Cannot access camera.')
         if self.calibrated:
             self.transform = cv2.warpPerspective(self.orig,self.transformationMatrix,(self.sidelength,self.sidelength))
+            self.left_region = self.orig[self.left_region_bounds[0,1]:self.left_region_bounds[1,1],self.left_region_bounds[0,0]:self.left_region_bounds[1,0]]
         else:
             # Set dimensions of transformed image
             self.height, self.width, ch = self.orig.shape
@@ -88,7 +90,7 @@ class Image():
             raise Exception ('Not able to see region left of the field. Adjust camera position.')
         if (left_region_y>self.height):
             left_region_y = self.height
-        self.left_region[1,:] = [left_region_x,left_region_y]
+        self.left_region_bounds[1,:] = [left_region_x,left_region_y]
     
         # Calculate corner locations in source image from rectangle corners
         urSrc = [x+w,y]
@@ -109,10 +111,19 @@ class Image():
         self.transform = cv2.warpPerspective(self.orig,self.transformationMatrix,(self.sidelength,self.sidelength))
         self.calibrated = True
         
-    def __is_moving(self,img):
+    def __is_moving(self,region):
+        '''region = 0: look at the field, region = 1: look at left region'''
         # http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_morphological_ops/py_morphological_ops.html
         kernel = np.ones((5,5),np.uint8)
-        fgmask = self.fgbg.apply(img)
+        self.__record_frame()
+        
+        if (region==0):
+            fgmask = self.fgbg.apply(self.transform)
+        elif (region==1):
+            fgmask = self.fgbg.apply(self.left_region)
+        else:
+            raise Exception ('Invalid region selected for movement detection')
+        
         ret, bw = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
         opening = cv2.morphologyEx(bw, cv2.MORPH_OPEN, kernel)
         
@@ -134,11 +145,12 @@ class Image():
         emptyTiles_shift = [x-1 for x in emptyTiles]
         
         
-        while self.__is_moving(self.transform):
+        while self.__is_moving(0):
             cv2.imshow('Transformed board',self.transform)
             print("Something is moving.")
-            cv2.waitKey(500)
-            self.__record_frame()
+            k = cv2.waitKey(500)
+            if k==27:
+                raise Exception ('Sign detection aborted by user input')
         
         self.__record_frame()
         cv2.imshow('Transformed board',self.transform)
@@ -206,22 +218,23 @@ class Image():
                     print('Found circle in tile {}'.format(i+1))
                     return [True,'O', i+1]
                    
-        cv2.waitKey(500)
+        k=cv2.waitKey(500)        
+        if k==27: # Pressing escape aborts the process
+            raise Exception ('Sign detection aborted by user input')
         return [False,'.',-1]
         
     def detect_first_move(self):
         if not self.calibrated:
             raise Exception ('Calibrate the camera before detecting the first move.')
+        
+        while self.__is_moving(1):
+            print("Something is moving left of the field.")
+            k=cv2.waitKey(500)        
+            if k==27: # Pressing escape aborts the process
+                raise Exception ('Sign detection aborted by user input')
+        
         self.__record_frame()
-        roi = self.orig[self.left_region[0,1]:self.left_region[1,1],self.left_region[0,0]:self.left_region[1,0]]
-        
-        while self.__is_moving(roi):
-            print("Something is moving.")
-            cv2.waitKey(500)
-            self.__record_frame()
-            roi = self.orig[self.left_region[0,1]:self.left_region[1,1],self.left_region[0,0]:self.left_region[1,0]]
-        
-        gray = cv2.cvtColor(roi,cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(self.left_region,cv2.COLOR_BGR2GRAY)
         bw = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 123, 50)
         
         # RETR_EXTERNAL
@@ -253,5 +266,7 @@ class Image():
                 print('Found circle.')
                 return [True,'O']
                 
-        cv2.waitKey(500)
+        k=cv2.waitKey(500)        
+        if k==27: # Pressing escape aborts the process
+            raise Exception ('Sign detection aborted by user input')
         return [False,'.']
