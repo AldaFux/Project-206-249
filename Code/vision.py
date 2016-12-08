@@ -4,6 +4,7 @@ class Image():
     def __init__(self):
         cv2.ocl.setUseOpenCL(False)
         self.calibrated = False
+        self.movement_for_new_game_detected = False
         self.orig = []
         self.transform = []
         self.gray = []
@@ -141,7 +142,6 @@ class Image():
         
     def detect_sign(self,emptyTiles):
         # emptyTiles should be a list with empty tiles
-        # emptyTiles_shift = list()
         emptyTiles_shift = [x-1 for x in emptyTiles]
         
         
@@ -227,8 +227,13 @@ class Image():
         if not self.calibrated:
             raise Exception ('Calibrate the camera before detecting the first move.')
         
+        counter = 0
         while self.__is_moving(1):
+            counter = counter + 1
             print("Something is moving left of the field.")
+            if (counter >= 2) and not self.movement_for_new_game_detected:
+                self.movement_for_new_game_detected = True
+                print('Starting to look for token')
             k=cv2.waitKey(500)        
             if k==27: # Pressing escape aborts the process
                 raise Exception ('Sign detection aborted by user input')
@@ -259,10 +264,12 @@ class Image():
             mean = np.mean(distances[1:])
             if 800<mean:
                 # CROSS
+                self.movement_for_new_game_detected = False
                 print('Found cross.')
                 return [True,'X']
             else:
                 # CIRCLE
+                self.movement_for_new_game_detected = False
                 print('Found circle.')
                 return [True,'O']
                 
