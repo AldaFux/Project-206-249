@@ -148,6 +148,7 @@ class GAME:
  
   def __init__(self):
     self.board = Board()
+    self.justStarted = True
     #self.update()
  
   def reset(self):
@@ -176,6 +177,15 @@ class GAME:
           moves = 0
           playerHasBegun = True
           
+          if (not self.justStarted):
+            moveCounter = 0
+            while (moveCounter <15):
+              if(img.is_moving(0)):
+                moveCounter = moveCounter + 1
+                time.sleep(0.5)
+            while (img.is_moving(0)):
+                continue
+          
           SER.write('F')  #send the command to draw the field
           self.waitForAcknowledgement()
          
@@ -187,6 +197,7 @@ class GAME:
               field_recognized = True
             except:
               continue
+          self.justStarted = False
           
           # Find out who is suposed to start!
           choiceDetected = False
