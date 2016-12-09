@@ -167,7 +167,7 @@ class GAME:
     SER.read()
       
   def mainloop(self): #Basically the main of the whole part that runs on the computer
-    print("Welcome to the optimal Tic Tac Toe player - you will never be able to win agains me!")
+    print("Welcome to TIC-TAC-TOBOT!")
     
     with vs.Image() as img: # necessary in order to initialize the connection to the camera and to end it properly
         
@@ -175,25 +175,35 @@ class GAME:
         while True:
           moves = 0
           playerHasBegun = True
-          print("Who is supposed to start the game? 1 = You; Anything else = The computer")
-          temp = raw_input().upper() 
-          if temp == '1':
-            playerHasBegun = True
-          else:
-            playerHasBegun = False
-            
-          SER.write('F') # ASCII for F -  necessary for python 3 #send the command to draw the field
-        
-          self.waitForAcknowledgement()
           
-          #if (not img.calibrated): #Calibrate in order to know the position of the field
+          SER.write('F')  #send the command to draw the field
+          self.waitForAcknowledgement()
+         
+          #only continue with the rest of the algorithm when the field is drawn
           field_recognized = False
-          while (not field_recognized):
+          while (not field_recognized): # 
             try:
               img.calibrate()        #Automatically sets the calibrated flag of img
               field_recognized = True
             except:
               continue
+          
+          # Find out who is suposed to start!
+          choiceDetected = False
+          signDetected = 'X'
+          print("Who is supposed to start the game? Draw a cross for starting and a circle for letting the robot start!")
+          while ( not choiceDetected):
+            (choiceDetected, signDetected) = img.detect_first_move()
+            
+          #Tell the robot which sign he should use
+          if (signDetected == 'O'):
+            playerHasBegun = False
+            SER.write('X')
+          else:
+            SER.write('O')
+          self.waitForAcknowledgement()
+            
+          
             #img.show_transform()
             
           while moves < 9:
@@ -206,11 +216,7 @@ class GAME:
               while not (found):
                   print('Make your move')
                   (found, sign, number) = img.detect_sign(self.board.emptyFields())
-              if (sign == 'O'):                       #update the sign that should be used by the robot
-                  SER.write('X')
-              elif(sign == 'X'):
-                  SER.write('O')
-              self.waitForAcknowledgement()                           #read acknowledgement from Buffer
+             
               (x,y) = self.getXYfromNumber(number)
               self.board = self.board.move(x,y)
               if(self.board.won() != None):
