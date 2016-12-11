@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Hardware}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Arduino Uno}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Servo Motors}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Webcam}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Robotic Manipulator}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Choosing the dimensions}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Manufacturing}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Simplified Kinematic Model}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{Complete Kinematic Model}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.5}{Modeling the Servo Motors}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Software on the Arduino}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Overview over the software structure}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Controlling the Servo Motors}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Software on the Computer}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Computer Vision}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Tic-Tac-Toe AI}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.3}{The Game Program}{section.5}% 18

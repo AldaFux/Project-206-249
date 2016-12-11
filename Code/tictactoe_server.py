@@ -9,7 +9,7 @@ SER = Serial.Serial()
 time.sleep(2) #wait until the serial connection is open
 
 def false_decision():
-    return random.random() < 0.00001 # ath the moment deactivated
+    return random.random() < 0.15 # ath the moment deactivated
  
 class Board:
  
@@ -164,7 +164,7 @@ class GAME:
   def waitForAcknowledgement(self):
     while(not SER.ser.inWaiting()):
             print("waiting")
-            time.sleep(0.1)
+            time.sleep(0.5)
     SER.read()
       
   def mainloop(self): #Basically the main of the whole part that runs on the computer
@@ -179,12 +179,18 @@ class GAME:
           
           if (not self.justStarted):
             moveCounter = 0
-            while (moveCounter <15):
+            while (moveCounter <4):
               if(img.is_moving(0)):
                 moveCounter = moveCounter + 1
-                time.sleep(0.5)
-            while (img.is_moving(0)):
-                continue
+              else:
+                moveCounter = 0
+              time.sleep(0.5)
+            while (moveCounter >2):
+              if(not img.is_moving(0)):
+                moveCounter = moveCounter - 1
+              else:
+                moveCounter = 4
+              time.sleep(0.5)
           
           SER.write('F')  #send the command to draw the field
           self.waitForAcknowledgement()
@@ -250,7 +256,7 @@ class GAME:
                 SER.write(temp)                                        #send the command to draw the field; make sure it is sent as character
                 while(not SER.ser.inWaiting()):
                   print("waiting")
-                  time.sleep(0.5)
+                  time.sleep(1)
                 SER.read()
                 if(self.board.won() != None):
                     print("Such a bad luck! You have lost! A new game will be started!")

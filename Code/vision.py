@@ -124,7 +124,7 @@ class Image():
         else:
             raise Exception ('Invalid region selected for movement detection')
         
-        ret, bw = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
+        ret, bw = cv2.threshold(fgmask, 100, 255, cv2.THRESH_BINARY)
         opening = cv2.morphologyEx(bw, cv2.MORPH_OPEN, kernel)
         
         opening, contours, hierarchy = cv2.findContours(opening,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
@@ -132,9 +132,10 @@ class Image():
         # loop over the contours
         for cnt in contours:
             # if the contour is too small, ignore it
-            if cv2.contourArea(cnt) < self.moving_min_area:
+            if cv2.contourArea(cnt) < (1-0.9*region)*self.moving_min_area:
                 continue
             else:
+                print("Something is moving.")
                 return True
         print('No movement detected.')
         return False
@@ -146,10 +147,7 @@ class Image():
         
         while self.is_moving(0):
             cv2.imshow('Transformed board',self.transform)
-            print("Something is moving.")
-            k = cv2.waitKey(500)
-            if k==27:
-                raise Exception ('Sign detection aborted by user input')
+            cv2.waitKey(500)
         
         self.__record_frame()
         cv2.imshow('Transformed board',self.transform)
@@ -217,22 +215,19 @@ class Image():
                     print('Found circle in tile {}'.format(i+1))
                     return [True,'O', i+1]
                    
-        k=cv2.waitKey(500)        
-        if k==27: # Pressing escape aborts the process
-            raise Exception ('Sign detection aborted by user input')
+        cv2.waitKey(500)
         return [False,'.',-1]
         
     def detect_first_move(self):
         if not self.calibrated:
             raise Exception ('Calibrate the camera before detecting the first move.')
         
-        while self.is_moving(1):
-            print("Something is moving left of the field.")
-            k=cv2.waitKey(500)        
-            if k==27: # Pressing escape aborts the process
-                raise Exception ('Sign detection aborted by user input')
+        while (self.is_moving(1)):
+            cv2.imshow('Left Region',self.left_region)
+            cv2.waitKey(500)
         
         self.__record_frame()
+        cv2.imshow('Left Region',self.left_region)
         gray = cv2.cvtColor(self.left_region,cv2.COLOR_BGR2GRAY)
         bw = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 123, 50)
         
@@ -247,7 +242,7 @@ class Image():
             hull = cv2.convexHull(cnt)
             area = cv2.contourArea(hull)
             # Check if area covered by contour is big enough to be a token
-            if (area<self.tile_min_area/2):
+            if (area<self.tile_min_area):
                 continue
                 
             defects = cv2.convexityDefects(cnt, hull_indices)
@@ -265,7 +260,5 @@ class Image():
                 print('Found circle.')
                 return [True,'O']
                 
-        k=cv2.waitKey(500)        
-        if k==27: # Pressing escape aborts the process
-            raise Exception ('Sign detection aborted by user input')
+        cv2.waitKey(500)
         return [False,'.']

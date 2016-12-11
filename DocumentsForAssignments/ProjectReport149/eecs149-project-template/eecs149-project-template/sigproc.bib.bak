@@ -1,0 +1,60 @@
+% Encoding: UTF-8
+
+@Article{bowman:reasoning,
+  author  = {Mic Bowman and Saumya K. Debray and Larry L. Peterson},
+  title   = {Reasoning About Naming Systems},
+  journal = {ACM Trans. Program. Lang. Syst.},
+  year    = {1993},
+  volume  = {15},
+  number  = {5},
+  pages   = {795-825},
+  month   = {November},
+}
+
+@Article{braams:babel,
+  author  = {Johannes Braams},
+  title   = {Babel, a Multilingual Style-Option System for Use with LaTeX's Standard Document Styles},
+  journal = {TUGboat},
+  year    = {1991},
+  volume  = {12},
+  number  = {2},
+  pages   = {291-301},
+  month   = {June},
+}
+
+@InProceedings{clark:pct,
+  author       = {Malcolm Clark},
+  title        = {Post Congress Tristesse},
+  booktitle    = {TeX90 Conference Proceedings},
+  year         = {1991},
+  pages        = {84-89},
+  month        = {March},
+  organization = {TeX Users Group},
+}
+
+@Book{Lamport:LaTeX,
+  title     = {LaTeX User's Guide and Document Reference Manual},
+  publisher = {Addison-Wesley Publishing Company},
+  year      = {1986},
+  author    = {Leslie Lamport},
+  address   = {Reading, Massachusetts},
+}
+
+@Book{salas:calculus,
+  title     = {Calculus: One and Several Variable},
+  publisher = {John Wiley and Sons},
+  year      = {1978},
+  author    = {S.L. Salas and Einar Hille},
+  address   = {New York},
+}
+
+@Website{AIAdaptedFrom,
+  author = {Maurits van der Schee},
+  url    = {https://www.leaseweb.com/labs/2013/12/python-tictactoe-tk-minimax-ai/},
+  title  = {Python TicTacToe with Tk and minimax AI},
+  year   = {2013},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
+
+@Comment{jabref-entrytype: Website: req[author;url;title] opt[license;note;year]}

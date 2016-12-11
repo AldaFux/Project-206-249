@@ -1,13 +1,64 @@
 \documentclass{sig-alternate-05-2015}
 \usepackage[cache=false]{minted}
-\usepackage{caption}
+%\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{listings}
+%\newenvironment{code}{\captionsetup{type=listing}}{}
+\usepackage{color}
 
-\newenvironment{code}{\captionsetup{type=listing}}{}
+
+
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\normalsize,        % the size of the fonts that are used for the code
+	breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	%frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\bfseries\color{mygreen},       % keyword style
+	language=C++,                 % the language of the code
+	morekeywords={*,Nickel},           % if you want to add more keywords to the set
+	%numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	%numbersep=5pt,                   % how far the line-numbers are from the code
+	%numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	%rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	%showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	%showstringspaces=false,          % underline spaces within strings only
+	%showtabs=false,                  % show tabs within strings adding particular underscores
+	%stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	%stringstyle=\color{mymauve},     % string literal style
+	tabsize=2	                   % sets default tabsize to 2 spaces
+	%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+\lstMakeShortInline[columns=fixed]|
+
+
+
+
+
 
 
 \def\sharedaffiliation{%
 \end{tabular}
 \begin{tabular}{c}}
+
+
+
+
 
 \begin{document}
 
@@ -15,16 +66,16 @@
 \subtitle{[EECS 149/249A Class Project]}
 
 
-\numberofauthors{2}
+%\numberofauthors{2}
 \author{
 % 1st. author
-\alignauthor
+%\alignauthor
 Patrick Scheffe \\
-\email{p.s@berkeley.edu} \\
+\email{p.s@berkeley.edu} 
 % 2nd. author
-\alignauthor
+\and
 Nikolas Alberti \\
-\email{nikolas.alberti@berkeley.edu} \\
+\email{nikolas.alberti@berkeley.edu} 
 % 3rd. author
 \sharedaffiliation
 \affaddr{Department of Electrical Engineering and Computer Science} \\
@@ -36,9 +87,43 @@ Nikolas Alberti \\
 \begin{abstract}
 
 \end{abstract}
-\section{Introduction}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Introduction}
+Our charter defines the goal of this project as follows:
+
+\emph{"In this project, we want to build a robot that will challenge you to play a game of tic-tac-toe. [...]The robot will control the movement of a whiteboard marker using two servos. The pen will be set up in a construction which has a shoulder and an elbow joint, so it can be moved to a defined x-y-position. The whiteboard is mounted in a fixed position next to the manipulator. First, the robot draws the playing field consisting of nine tiles. A camera will be used for monitoring the player's move (placing a circle or a cross). Autonomously, the robot will react and make its own move. In order to make space for the human player's moves, the whole construction should be able to move away from the field."}
+
+This definition specifies well what the robot should be capable of doing. Accordingly, in order to meet the specification, a robotic manipulator must be assembled and controlled. Moreover, a computer vision component must be setup. At the end, everything must work together governed by a program that keeps track of the game and is able to compute own moves.
 \section{Hardware}
+\subsection{Arduino Uno}
+The Arduino Uno is a microcontroller board equipped with an Atmel ATmega328P microcontroller. Arduino is an open-source hardware and software project originated in Ivrea, Italy. The hard- software have been distributed by the founders of Arduino (known as Arduino LLC) and the producer of the official Arduino boards (Arduino S.r.L.). The goal of the Arduino project is to make the development on Embedded as accessible as possible. For instance, the Arduino IDE, completely hides technical details like header files from the user.
+
+The Arduino has 14 GPIO pins from which 6 support pulse width modulation (PWM). Because PWM is needed for controlling servo motors, that was the reason why we chose the Arduino as our platform along with the fact that the Arduino promised to offer an uncomplicated development.
+
+\subsection{Servo Motors}
+For the actuation, we used three Tower Pro MG90S servo motors. To connect them with the Arduino we used ordinary jumper cables. A 5V/2A power supply has been used in order to power the servo motors. Furthermore, a breadboard was used for distributing the power. Because the power supply originally ended in a coaxial power connector, we modified it have jumper cables as output for positive and negative voltage.
+
+\subsection{Webcam}
+A Microsoft LifeCam HD-3000 was used for the computer vision. Any webcam would have served the purpose.
 
 \section{Robotic Manipulator}
 \subsection{Choosing the dimensions}
@@ -46,9 +131,9 @@ Nikolas Alberti \\
 For accurate two dimensional actuation, a classical robotic manipulator that  consists a chain of dependent joints is not suitable for a low budget approach. The plotclock, a project by Johannes "\emph{Joo}" Heberlein from the Fablab Nuremberg (comparable to a makerspace) impressively proved a way to make low budget 2D actuation work. Therefore, we planed to chose a similar manipulator. However, while the plotclock needs to cover a range whose horizontal dimensions exceed the vertical, it was not possible to blindly adapt the manipulator. For our project, actuation needs to be performed in an area formed like a square. Therefore, we needed to resize the limbs.
 
 This problem can be described as a maximization problem:
- The desired area of the largest possible square that fits into the reachable range of the actuator is given. Find the dimensions $L_1$, $L_2$ and $L_3$ that minimize the sum $L_1 + L_2 +L3$.
+ The desired area of the largest possible square that fits into the reachable range of the actuator is given. Find the dimensions $L_1$, $L_2$ and $L_3$ that minimize the sum $L_1 + L_2 +L_3$.
  
- Unfortunately, the function of the largest square $A(L_1, L_2, L_3)$ is not linear and therefore the problem can not be solved by partly derive towards $L_1$, $L_2$ and $L_3$ and set the derivations to zero. 
+ Unfortunately, the function of the largest square $A(L_1, L_2, L_3)$ is not defined by a function that allows for partly deriving towards $L_1$, $L_2$ and $L_3$ and setting the derivations to zero. 
  We therefore chose to model the reachable space in a geometry software called \emph{Geogebra}, an open source software for supporting mathematical education in schools. Then, we empirically derived a near optimal sizing that yields a reachable square of $100 cm^2$.
 \subsection{Manufacturing}
 \subsection{Simplified Kinematic Model}\label{section1}
@@ -165,9 +250,13 @@ x = a\cos(\theta_2) - \frac{L_3}{2}
 Now, the methods from section \ref{section1} can be used to solve for $\theta_3$ and $\theta_4$.
 \subsection{Modeling the Servo Motors}
 Servo motors are motors that do not support continuous motion but in return precisely can be driven to a desired angle. They have three external cables in different colors. The black cable should be connected to ground and the red one to $V_{DD}$ (approximately 5V). These two cables supply the servo motor with the necessary power. The third cable (white, yellow or orange) carries the control signal. The control is done by pulse width modulation (PWM). The servo motor expects to receive a pulse every 20\,ms with a pulse width between 1\,ms and 2\,ms. By proportional control, the servo motor assumes its most positive position at the the pulse width of 1\,ms and the most negative position at a pulse width of 2\,ms as defined in the mathematical direction of rotation. The range in between these extrema can be assumed to be linearly covered, i.e. a pulse width of 1.5\,ms should yield the position in between these positions. A function can be derived that maps the pulse width to an angular position of the servomotor:
-\begin{eqnarray}
-Angle(t_{pulse}) &=& \frac{t_{pulse} -1 \text{ms} }{2 \text{ms}-1 \text{ms}}\cdot \left(Angle_{max}-Angle_{min}\right)&\nonumber \\ &&+Angle_{min},&1 \text{ms} \le t_{pulse}\le 2 \text{ms}  \nonumber
-\end{eqnarray}
+\begin{align*}
+	\text{Angle}(t_\text{pulse}) =~& \frac{t_\text{pulse} -1\,\text{ms} }{2\,\text{ms}-1\,\text{ms}}\cdot \left(\text{Angle}_{max}-\text{Angle}_{min}\right) \\ & + \text{Angle}_{min}, \qquad 1\,\text{ms} \le t_\text{pulse}\le 2\,\text{ms}
+\end{align*}
+
+%\begin{eqnarray}
+%Angle(t_{pulse}) &=& \frac{t_{pulse} -1 \text{ms} }{2 \text{ms}-1 \text{ms}}\cdot \left(Angle_{max}-Angle_{min}\right)&\nonumber \\ &&+Angle_{min},&1 \text{ms} \le t_{pulse}\le 2 \text{ms}  \nonumber
+%\end{eqnarray}
 This is just a model of the movement of the servo motors. There are three causes that the actual behavior deviates from the model:
 \begin{itemize}
 	\item A high torque forces the servo motors from leaving its desired position.
@@ -199,26 +288,38 @@ The Arduino Uno has six PWM pins available.
 Very conveniently, the Arduino IDE already is equipped with a library \texttt{Servo}. This library allows us to instantiate objects of the type \texttt{Servo}. The most important functions on this object are \texttt{attach()} and \texttt{write()}. The \texttt{attach()} function assigns the Servo object to a GPIO pin. The \texttt{write()} maps an angle in the range of $0^\circ$ to $180^\circ$ to a pulse width and makes the attached GPIO pin assume the according PWM. Inherently, a reachable range of $180^\circ$ is assumed for the servo motor. However, our servo motors only are capable of spinning $150^\circ$. Signals that exceed the range of approximately $15^\circ$ to $165^\circ$ simply have been ignored.
 
 Additionally,the gear that is on top of the servo motor did not allow us to attach the hat that enables us to move the limbs in any desired way. Therefore, the angle due to this offset also needed to be considered. 
-\begin{code}
-	\captionof{listing}{Angle Conversion}
-\begin{minted}{c++}
+%\begin{code}
+%	\captionof{listing}{Angle Conversion}
+%\begin{minted}{c++}
+\begin{lstlisting}[caption = Niko]
 #define leftMax 161
 #define rightMax 16
 ...
 void calculateServoMap(:::){
 ...
-*servoLsoll = leftMax 
-              - (pi - (theta1+theta2) ) * 180/pi; 
-*servoRsoll = rightMax 
-              + (pi - (theta3+theta4) ) * 180/pi;
+*servoLsoll = leftMax - (pi - (theta1+theta2) ) * 180/pi; 
+*servoRsoll = rightMax + (pi - (theta3+theta4) ) * 180/pi;
 }
-\end{minted}
-\end{Code}
+\end{lstlisting}
+%\end{minted}
+%\end{Code}
 
+|void| Niko |void|
 
 \section{Software on the Computer}
 \subsection{Computer Vision}
 \subsection{Tic-Tac-Toe AI}
+As a simple and well known game, tic-tac-toe already is fully explored and algorithms to optimally play the game are available. Also, the relatively state space of the board make exhaustive search for an optimal solution possible. The concept of our implementation in Python is nicely explained in [LINK einfügen].%TODO
+ Furthermore, [ANOTHER SOURCE] served as basis for our code. Still, severe changes had to be made, since this heavily relies on functions supplied by a GUI.
+
+Since the detailed explanation can be read in [Link], the principle here should only summarized: A $3\times 3$ 2D-array of represents the nine gaps in the field. On each move, the algorithm iterates over the gaps and when it encounters an empty gap it recursively calls itself. Doing so, an altered board with the new move and another active player is passed. The break condition is either that one of the players has won or there is no free gap anymore. The original caller chooses the move that has offers the best outcome with in case of a win minimum and in case of a defeat maximum number of recursive calls.
+
+The described algorithm plays optimally, in a meaning that it is impossible to win against it. Also, in case a win can be enforced, the computer finds this optimal path to the win. Still, it lacks an understanding for common human mistakes and assumes the opponent to play optimally himself.
+
+In order to offer some kind of a sense of achievement to the player with a probability of 15\% the algorithm is disabled and a random move is made.
 \subsection{The Game Program}
+Having described each part separately, the only thing left is combining each part to form the robot that autonomously plays Tic-Tac-Toe. A superordinate loop sets up the playing field and makes the player decide whether he wants to start or not. In order to completely decouple the game from input at the computer, we made the design choice that the first player's sign is the cross and the second player's sign is the circle. With that definition, the dialog whether the player or the computer should start the game completely can be done by drawing either a cross (``I want to start!'') or a circle (``The computer should start!'') to the right of the playing field.
+
+Once the setup is done, a subordinate loop is started that breaks after nine subsequent moves or when on one of the players has won.
 
 \end{document}
