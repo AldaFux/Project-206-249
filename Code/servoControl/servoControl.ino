@@ -91,18 +91,13 @@ void lower()
   if(servoM_angle_last == LOWERED) return;
   
   difference = LOWERED - servoM_angle_last; 
-  
   sign = (difference > 0) - (difference < 0);
-  
   steps = difference*sign;
-  
   for(i = 0; i<= steps; i++)
   {
     servoM.write(servoM_angle_last + i*sign);
     delay(19);
   }
-  
-  
   servoM_angle_last = LOWERED;
 }
 
@@ -112,20 +107,15 @@ void lift() //somehow not yet working
   if(servoM_angle_last == LIFTED) return;
   
   difference = LIFTED - servoM_angle_last; 
-  
   sign = (difference > 0) - (difference < 0);
-  
   steps = difference*sign;
-  
   for(i = 0; i<= steps; i++)
   {
     servoM.write(servoM_angle_last + i*sign);
     delay(19);
   }
-  
   servoM_angle_last = LIFTED;
 }
-
 
 
 //-------------------------------------------Help functions for setting the servos---------------------
@@ -151,7 +141,7 @@ void calculateServoMap(double x_prime, double y_prime, double * servoLsoll , dou
   
   //new part for code refinement
   d = sqrt( (x_prime + l3/2)*(x_prime + l3/2) + y_prime*y_prime);
-  f = sqrt( x_prime*x_prime + y_prime*y_prime);
+  f = sqrt( x_prime*x_prime + y_prime*y_prime );
   
   theta1_prime = cosineLaw_angle(d, l1, l4);
   theta2_prime = cosineLaw_angle(d, l3/2, f);
@@ -165,15 +155,11 @@ void calculateServoMap(double x_prime, double y_prime, double * servoLsoll , dou
   y = a * sin(theta2);
   x = a * cos(theta2) - l3/2;
   
-  //end new part -- left side completely determined
-  
   alpha = atan2(y,x);
   
   c = sqrt(y*y + x*x); //c only defined by the distance of the endeffector towards the origin  
   
   b = cosineLaw_side(c, l3/2, alpha);//use cosine rule to get b
-  
-  
   /*
   //use sine rule to get theta2 and theta3, BUT ATTENTION: sine rule is ambiguous - case differentiation is necessary
   if( x > 1.125)
@@ -192,14 +178,12 @@ void calculateServoMap(double x_prime, double y_prime, double * servoLsoll , dou
     theta3 = asin(sin(alpha)* c/b);
   }
   */ //Sine rule is not optimal since it reequires case differentiation and makes the transition very unsmooth --> use cosine rule instead
-  
+  //still left here for reference
   
   theta3 = cosineLaw_angle(b, l3/2, c);
   theta4 = cosineLaw_angle(b, l1, l2);
- 
   *servoLsoll = leftMax - (pi - (theta1+theta2) ) * 180/pi; 
   *servoRsoll = (pi - (theta3+theta4)) * 180/pi + rightMax;
-  
 }
 
 void set_servos (double x, double y)
@@ -216,7 +200,6 @@ void go_to (double xto, double yto)
   double x_distance, y_distance, distance;
   x_distance = xto-xlast;
   y_distance = yto-ylast;
-  
   distance = sqrt( x_distance*x_distance + y_distance*y_distance);
   
   //try always to do steps with the same step size, regardless of the distance
@@ -228,7 +211,6 @@ void go_to (double xto, double yto)
    set_servos(xlast + (x_distance*i/steps), ylast + (y_distance*i/steps));
    delay(5);//5
   }
-  
   set_servos(xto, yto);
   delay(100);
   xlast = xto;
@@ -304,10 +286,7 @@ void draw_next( double x_offset, double y_offset)
 void driveToMontagePosition() //DO NOT USE WHILE ROBOT IS ASSEMBLED!!!!!!!!!!!!!!!
 {
   servoM.write(90);
-  //servoL.write(leftMax);
-  //servoR.write(rightMax);
 }
-
 
 void wipe() //wiping with the robot does not wirk
 {

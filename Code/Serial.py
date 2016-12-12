@@ -10,9 +10,8 @@ BAUDRATE = 9600
 
 
 """ 
-The pyserial library proved to be very tedious and prone to errors when steps are forgotten or
+The pyserial library proved to be very tedious and prone to errors when initialization steps are forgotten or
 when a read happens when there is nothing to read or when more than one character is sent.                  
-
 """
 class Serial:
     

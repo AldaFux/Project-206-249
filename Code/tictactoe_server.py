@@ -50,15 +50,17 @@ class Board:
         if self.fields[x,y]==self.empty:
           value = self.move(x,y).__minimax(not player)[0]           #a lot is crunched to this line: First, a move is executed. Doing so, the board is copied in a variable. The copied board will be
                                                                     #have a move placed by the current player. The active roles of the board will be canged and afterwards the board will be returned
-                                                                    #From the given board the minimax gunction will be executed
+                                                                    #From the given board the minimax function will be executed
           if value>best[0]:
             best = (value,(x,y))
       return best
     else:
-      best = (+2,None)
+      best = (+11,None)
       for x,y in self.fields:
         if self.fields[x,y]==self.empty:
-          value = self.move(x,y).__minimax(not player)[0]
+          value = self.move(x,y).__minimax(not player)[0]           #a lot is crunched to this line: First, a move is executed. Doing so, the board is copied in a variable. The copied board will be
+                                                                    #have a move placed by the current player. The active roles of the board will be canged and afterwards the board will be returned
+                                                                    #From the given board the minimax function will be executed
           if value<best[0]:
             best = (value,(x,y))
       return best
@@ -117,6 +119,7 @@ class Board:
     return None
     
   def emptyFields(self):
+    """Returns a list with the numbers each available empty field as seen on the numpad"""
     listing = []
     for y in range(self.size):
       for x in range(self.size):
@@ -161,23 +164,23 @@ class GAME:
   def getXYfromNumber(self, number):
     return ((number-1)%3, 2-(number-1)/3 )
     
-  def waitForAcknowledgement(self):
+  def waitForAcknowledgement(self):             #checks every half a second whether the Arduino has sent the Acknowledgement
     while(not SER.ser.inWaiting()):
             print("waiting")
             time.sleep(0.5)
     SER.read()
       
-  def mainloop(self): #Basically the main of the whole part that runs on the computer
+  def mainloop(self):                           #Basically the main of the whole part that runs on the computer
     print("Welcome to TIC-TAC-TOBOT!")
     
-    with vs.Image() as img: # necessary in order to initialize the connection to the camera and to end it properly
+    with vs.Image() as img:                     # necessary in order to initialize the connection to the camera and to end it properly
         
         
         while True:
           moves = 0
           playerHasBegun = True
           
-          if (not self.justStarted):
+          if (not self.justStarted):            #wait for the drawings of the previous field to be removed before starting a new game
             moveCounter = 0
             while (moveCounter <4):
               if(img.is_moving(0)):
@@ -192,14 +195,13 @@ class GAME:
                 moveCounter = 4
               time.sleep(0.5)
           
-          SER.write('F')  #send the command to draw the field
-          self.waitForAcknowledgement()
-         
-          #only continue with the rest of the algorithm when the field is drawn
+          SER.write('F')                        #send the command to draw the field
+          self.waitForAcknowledgement()         #only continue with the rest of the algorithm when the field is drawn
+          
           field_recognized = False
-          while (not field_recognized): # 
+          while (not field_recognized):         #No functionality can be performed until the field is recognized. Therefore: keep trying
             try:
-              img.calibrate()        #Automatically sets the calibrated flag of img
+              img.calibrate()                   #Automatically sets the calibrated flag of img
               field_recognized = True
             except:
               continue
@@ -261,7 +263,7 @@ class GAME:
                 if(self.board.won() != None):
                     print("Such a bad luck! You have lost! A new game will be started!")
                     SER.write('L')
-                    moves = 9
+                    moves = 9                                          #easy way of making the game end 
                     self.waitForAcknowledgement()
                 elif (self.board.tied()):
                     print("It's something! At least you havn't lost. A new game will be started!")
@@ -269,13 +271,6 @@ class GAME:
                     self.waitForAcknowledgement()
             print(self.board.__str__())
             
-            #if(self.board.won() != None):
-             # print("Such a bad luck! You have lost! A new game will be started!")
-              #SER.write('L')
-              #moves = 9
-            #if(self.board.tied()):
-              #print("It's something! At least you havn't lost. A new game will be started!")
-              #SER.write('D')
             moves = moves + 1
           print("")
           self.reset()

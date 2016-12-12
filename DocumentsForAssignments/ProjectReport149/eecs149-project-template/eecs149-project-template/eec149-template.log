@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.12.7)  10 DEC 2016 20:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.12.7)  11 DEC 2016 16:14
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -579,7 +579,7 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (c:/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-Package Listings Info: Made | a short reference for \lstinline on input line 47
+Package Listings Info: Made | a short reference for \lstinline on input line 48
 .
 runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > ee
 c149-template.aex <nul: /p x=^%~$PATH:i>> eec149-template.aex)...executed.
@@ -590,26 +590,26 @@ runsystem(del eec149-template.aex)...executed.
 (./eec149-template.aux)
 \openout1 = `eec149-template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 63.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 63.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 54.
  (c:/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
 
 (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -647,7 +647,7 @@ e
 Package hyperref Warning: Height of page (\paperheight) is invalid (0.0pt),
 (hyperref)                using 11in.
 
-Package hyperref Info: Link coloring OFF on input line 63.
+Package hyperref Info: Link coloring OFF on input line 54.
 (c:/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -656,226 +656,119 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count158
 )
-LaTeX Info: Redefining \ref on input line 63.
-LaTeX Info: Redefining \pageref on input line 63.
-LaTeX Info: Redefining \nameref on input line 63.
+LaTeX Info: Redefining \ref on input line 54.
+LaTeX Info: Redefining \pageref on input line 54.
+LaTeX Info: Redefining \nameref on input line 54.
 
 (./eec149-template.out) (./eec149-template.out)
 \@outlinefile=\write7
 \openout7 = `eec149-template.out'.
 
 \c@lstlisting=\count159
-LaTeX Font Info:    Try loading font information for U+msa on input line 87.
+LaTeX Font Info:    Try loading font information for U+msa on input line 77.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 87.
+LaTeX Font Info:    Try loading font information for U+msb on input line 77.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 87.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 77.
 
 (c:/texlive/2016/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (14.80789pt too wide) in paragraph at lines 136--138
-[]\T1/aer/m/n/9 Unfortunately, the func-tion of the largest square $\OML/cmm/m/
-it/9 A\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 L[]; L[]; L[]\OT1/cmr/m/n/9 )$
- []
-
-<LinkDiagramSimple_try.pdf, id=77, 346.29375pt x 343.2825pt>
-File: LinkDiagramSimple_try.pdf Graphic file (type pdf)
-
-<use LinkDiagramSimple_try.pdf>
-Package pdftex.def Info: LinkDiagramSimple_try.pdf used on input line 146.
-(pdftex.def)             Requested size: 211.67908pt x 209.84201pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+<img/sizing.png, id=86, 722.09775pt x 475.17525pt>
+File: img/sizing.png Graphic file (type png)
+ <use img/sizing.png>
+Package pdftex.def Info: img/sizing.png used on input line 119.
+(pdftex.def)             Requested size: 211.67908pt x 139.29091pt.
 
 [1{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-<LinkDiagramComplicated_try.pdf, id=92, 346.29375pt x 343.2825pt>
-File: LinkDiagramComplicated_try.pdf Graphic file (type pdf)
+<img/LinkDiagramSimple_try.pdf, id=109, 346.29375pt x 343.2825pt>
+File: img/LinkDiagramSimple_try.pdf Graphic file (type pdf)
 
-<use LinkDiagramComplicated_try.pdf>
-Package pdftex.def Info: LinkDiagramComplicated_try.pdf used on input line 192.
-
+<use img/LinkDiagramSimple_try.pdf>
+Package pdftex.def Info: img/LinkDiagramSimple_try.pdf used on input line 129.
 (pdftex.def)             Requested size: 211.67908pt x 209.84201pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+<img/LinkDiagramComplicated_try.pdf, id=111, 346.29375pt x 343.2825pt>
+File: img/LinkDiagramComplicated_try.pdf Graphic file (type pdf)
+
+<use img/LinkDiagramComplicated_try.pdf>
+Package pdftex.def Info: img/LinkDiagramComplicated_try.pdf used on input line 
+156.
+(pdftex.def)             Requested size: 211.67908pt x 209.84201pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \vbox (badness 1509) has occurred while \output is active []
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.232 \end{equation}
-                     [2 <./LinkDiagramSimple_try.pdf> <./LinkDiagramComplicated
-_try.pdf
+l.175 \end{align*}
+                   [2 <./img/sizing.png> <./img/LinkDiagramSimple_try.pdf>]
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 218.
 
-pdfTeX warning: pdflatex.exe (file ./LinkDiagramComplicated_try.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
->]
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -S default -f latex -P commandprefix=PYG > eec149-template
-.out.pyg)...executed.
-
- (./eec149-template.out.pyg)
-runsystem(pygmentize -S default -f latex -P commandprefix=PYGdefault > eec149-t
-emplate.out.pyg)...executed.
-
- (./eec149-template.out.pyg)
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-
-(./eec149-template.out.pyg
-
-LaTeX Font Warning: Font shape `T1/aett/bx/n' undefined
-(Font)              using `T1/aett/m/n' instead on input line 2.
-
-)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-
-(./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-
-(./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-
-(./eec149-template.out.pyg)
-Overfull \hbox (15.84824pt too wide) in paragraph at lines 1--278
-[] \T1/aer/m/n/9 cal-
- []
-
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-(./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-Overfull \hbox (11.52792pt too wide) in paragraph at lines 1--280
-[][] \T1/aer/m/n/9 in-ter-po-lates be-
- []
-
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-(./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
-
-(./eec149-template.out.pyg)
-\openout6 = `eec149-template.pyg'.
-
-runsystem(pygmentize -l c++ -f latex -P commandprefix=PYG -F tokenmerge -o eec1
-49-template.out.pyg eec149-template.pyg)...executed.
-
- (./eec149-template.out.pyg)
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 294.
-LaTeX Font Info:    Try loading font information for TS1+aer on input line 300.
-
-LaTeX Font Info:    No file TS1aer.fd. on input line 300.
+LaTeX Font Info:    No file TS1aer.fd. on input line 218.
 
 
 LaTeX Font Warning: Font shape `TS1/aer/m/n' undefined
 (Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 300.
+(Font)              for symbol `textasteriskcentered' on input line 218.
+
+
+Overfull \hbox (15.42325pt too wide) in paragraph at lines 222--223
+[][][][][][][][][][][][][][][][][][][][]
+ []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.302 }
-        [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 325.
+l.223 	\item |
+              draw_field()| draws the playing field. [3 <./img/LinkDiagramCompl
+icated_try.pdf>]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 236.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.325 \end{document}
-                     [4
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 325.
+l.299 \end{document}
+                     [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
  (./eec149-template.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 325.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 325.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 299.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
 Package rerunfilecheck Info: File `eec149-template.out' has not changed.
-(rerunfilecheck)             Checksum: EA30C9635C8A24CF65C2576D475817DF;1156.
+(rerunfilecheck)             Checksum: 54B438274D000944463B4A9177C09FE5;1216.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-runsystem(del eec149-template.pyg)...executed.
-
-runsystem(del eec149-template.out.pyg)...executed.
-
  ) 
 Here is how much of TeX's memory you used:
- 11216 strings out of 493013
- 175658 string characters out of 6137008
- 342928 words of memory out of 5000000
- 14462 multiletter control sequences out of 15000+600000
- 52938 words of font info for 72 fonts, out of 8000000 for 9000
+ 11031 strings out of 493013
+ 172769 string characters out of 6137008
+ 352702 words of memory out of 5000000
+ 14320 multiletter control sequences out of 15000+600000
+ 52771 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,58p,1050b,1816s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,58p,1019b,1223s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{c:/tex
 live/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2016/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/
@@ -886,15 +779,14 @@ fb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texl
 ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2016/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2016/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2016/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmtt9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfr
-m0900.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/t
-exlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2016/tex
-mf-dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on eec149-template.pdf (4 pages, 290844 bytes).
+/public/amsfonts/cm/cmti9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/cm
+-super/sfrm0900.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvb8a
+.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texliv
+e/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+Output written on eec149-template.pdf (4 pages, 359853 bytes).
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 210 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 155 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 253 PDF objects out of 1000 (max. 8388607)
+ 223 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
