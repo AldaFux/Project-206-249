@@ -77,6 +77,7 @@
   url          = {geogebra.org},
   title        = {Geogebra},
   license      = {Open-source non-commercial},
+  note         = {Open-source non-commercial license},
   year         = {2001},
   howpublished = {\url{http://geogebra.org}},
 }
@@ -95,6 +96,18 @@
   howpublished = {\url{https://www.adafruit.com/products/1143}},
 }
 
-@Comment{jabref-meta: databaseType:bibtex;}
+@Website{3D,
+  author       = {SeeMeCNC},
+  title        = {ROSTOCK MAX™ V3 DESKTOP 3D PRINTER DIY KIT},
+  howpublished = {\url{https://www.seemecnc.com/products/rostock-max-v3-desktop-3d-printer-diy-kit}},
+  url          = {https://www.seemecnc.com/products/rostock-max-v3-desktop-3d-printer-diy-kit},
+}
 
-@Comment{jabref-entrytype: Website: req[author;url;title] opt[license;note;year]}
+@Website{CAD,
+  author       = {Autodesk},
+  title        = {Autodesk Inventor},
+  howpublished = {\url{http://www.autodesk.com/products/inventor/overview}},
+  url          = {http://www.autodesk.com/products/inventor/overview},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
